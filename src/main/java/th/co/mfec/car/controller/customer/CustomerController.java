@@ -1,9 +1,10 @@
-package th.co.mfec.car.controller;
+package th.co.mfec.car.controller.customer;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import th.co.mfec.car.service.customer.CustomerService;
 
 @RestController
 @RequestMapping("/api/v1/customer")
+@CrossOrigin(origins = "*")
 public class CustomerController {
 
     @Autowired

@@ -24,7 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
-				.authorizeRequests().antMatchers("/**/v1/customer/register", "/**/v1/customer/authen")
+				.authorizeRequests()
+				.antMatchers("/**/v1/customer/register", "/**/v1/customer/authen", "localhost:3000/**")
 				.anonymous();
 
 	}
