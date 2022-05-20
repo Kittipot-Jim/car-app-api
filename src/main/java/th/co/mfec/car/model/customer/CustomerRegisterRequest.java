@@ -10,6 +10,9 @@ public class CustomerRegisterRequest {
     @NotEmpty(message = "The password is required.")
     private String password;
 
+    @NotEmpty(message = "The confirm password is required.")
+    private String passwordConfirm;
+
     public String getEmail() {
         return email;
     }
@@ -24,6 +27,14 @@ public class CustomerRegisterRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
 
 }

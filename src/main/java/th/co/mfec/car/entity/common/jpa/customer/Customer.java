@@ -15,7 +15,7 @@ public class Customer {
     @Column(name = "cust_id")
     private String custId;
 
-    @Column(name = "email")
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password")

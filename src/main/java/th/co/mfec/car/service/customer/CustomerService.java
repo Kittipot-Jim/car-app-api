@@ -33,7 +33,9 @@ public class CustomerService {
 
         customer.setCustId(formattedDate + uuidAString);
         customer.setEmail(customerRegisterRequest.getEmail());
-        customer.setPassword(passwordEncoder.encode(customerRegisterRequest.getPassword()));
+        if (customerRegisterRequest.getPassword().equals(customerRegisterRequest.getPasswordConfirm())) {
+            customer.setPassword(passwordEncoder.encode(customerRegisterRequest.getPassword()));
+        }
         customer.setCreatedBy(formattedDate + uuidAString);
         customer.setCreatedDate(new Date());
         customer.setUpdatedDate(new Date());
