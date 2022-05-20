@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import th.co.mfec.car.model.common.SuccessResponse;
+import th.co.mfec.car.model.customer.CustomerAuthenRequest;
+import th.co.mfec.car.model.customer.CustomerAuthenResponse;
 import th.co.mfec.car.model.customer.CustomerRegisterRequest;
 import th.co.mfec.car.model.customer.CustomerRegisterResponse;
 import th.co.mfec.car.service.customer.CustomerService;
@@ -30,6 +32,11 @@ public class CustomerController {
         CustomerRegisterResponse customerRegisterResponse = customerService.register(customerRegisterRequest);
         successResponse.setData(customerRegisterResponse);
         return ResponseEntity.ok(successResponse);
+    }
+
+    @PostMapping("/authen")
+    public ResponseEntity<SuccessResponse<CustomerAuthenResponse>> authen(@Valid @RequestBody CustomerAuthenRequest customerAuthenRequest){
+        return ResponseEntity.ok(new SuccessResponse<CustomerAuthenResponse>(customerService.authen(customerAuthenRequest)));
     }
 
 }

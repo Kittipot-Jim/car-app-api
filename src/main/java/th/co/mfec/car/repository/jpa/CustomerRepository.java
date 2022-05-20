@@ -7,5 +7,5 @@ import th.co.mfec.car.entity.common.jpa.customer.Customer;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, String> {
-
+    Customer findByEmail(String email);
 }
