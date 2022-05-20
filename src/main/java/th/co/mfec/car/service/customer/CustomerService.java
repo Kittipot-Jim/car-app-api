@@ -13,6 +13,7 @@ import th.co.mfec.car.entity.common.jpa.customer.Customer;
 import th.co.mfec.car.model.customer.CustomerRegisterRequest;
 import th.co.mfec.car.model.customer.CustomerRegisterResponse;
 import th.co.mfec.car.repository.jpa.CustomerRepository;
+import th.co.mfec.car.util.ValidatePassword;
 
 @Service
 public class CustomerService {
@@ -34,7 +35,9 @@ public class CustomerService {
         customer.setCustId(formattedDate + uuidAString);
         customer.setEmail(customerRegisterRequest.getEmail());
         if (customerRegisterRequest.getPassword().equals(customerRegisterRequest.getPasswordConfirm())) {
-            customer.setPassword(passwordEncoder.encode(customerRegisterRequest.getPassword()));
+            if (ValidatePassword.isValid(customerRegisterRequest.getPassword())){
+                customer.setPassword(passwordEncoder.encode(customerRegisterRequest.getPassword()));
+            }
         }
         customer.setCreatedBy(formattedDate + uuidAString);
         customer.setCreatedDate(new Date());
