@@ -20,10 +20,10 @@ public class JwtUtil {
     @Value("${app.jwt.expired}")
     private String expired;
     
-    public String generateToken(String username) {
-        Date expiryDate = new Date(System.currentTimeMillis() + 1000 * 60 *Integer.parseInt(expired));
+    public String generateToken(String email) {
+        Date expiryDate = new Date(System.currentTimeMillis() + 1000 * 60 * Integer.parseInt(expired));
         String token = Jwts.builder()
-            .setSubject(username)
+            .setSubject(email)
             .setIssuedAt(new Date())
             .setExpiration(expiryDate)
             .signWith(SignatureAlgorithm.HS256, secret)
@@ -44,7 +44,7 @@ public class JwtUtil {
 
     }
 
-    public String getUsernameFromJwt(String token) {
+    public String getEmailFromJwt(String token) {
         return Jwts.parser()
             .setSigningKey(secret)
             .parseClaimsJws(token)
