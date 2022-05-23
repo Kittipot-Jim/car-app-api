@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -71,6 +72,22 @@ public class CustomerService {
             throw new BaseException(HttpStatus.UNAUTHORIZED, StatusCode.ERR_CODE_401, StatusCode.ERR_DESC_401);
         }
         String token = jwtUtil.generateToken(customer.getEmail());
+        CustomerAuthenResponse customerAuthenResponse = new CustomerAuthenResponse();
+        customerAuthenResponse.setCustId(customer.getCustId());
+        customerAuthenResponse.setEmail(customer.getEmail());
+        customerAuthenResponse.setToken(token);
+        return customerAuthenResponse;
+    }
+
+    public CustomerAuthenResponse refreshToken() {
+        String email = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Customer customer = customerRepository.findByEmail(email);
+        String token = jwtUtil.generateToken(email);
+
+        if(email == null) {
+            throw new BaseException(HttpStatus.UNAUTHORIZED, StatusCode.ERR_CODE_401, StatusCode.ERR_DESC_401);
+        }
+        
         CustomerAuthenResponse customerAuthenResponse = new CustomerAuthenResponse();
         customerAuthenResponse.setCustId(customer.getCustId());
         customerAuthenResponse.setEmail(customer.getEmail());
