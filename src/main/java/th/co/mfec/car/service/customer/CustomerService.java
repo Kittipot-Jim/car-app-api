@@ -84,10 +84,6 @@ public class CustomerService {
         Customer customer = customerRepository.findByEmail(email);
         String token = jwtUtil.generateToken(email);
 
-        if(email == null) {
-            throw new BaseException(HttpStatus.UNAUTHORIZED, StatusCode.ERR_CODE_401, StatusCode.ERR_DESC_401);
-        }
-        
         CustomerAuthenResponse customerAuthenResponse = new CustomerAuthenResponse();
         customerAuthenResponse.setCustId(customer.getCustId());
         customerAuthenResponse.setEmail(customer.getEmail());

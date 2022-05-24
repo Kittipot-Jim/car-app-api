@@ -1,6 +1,5 @@
 package th.co.mfec.car.security.filter;
 
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +51,7 @@ public class JwtFilter extends OncePerRequestFilter {
                     }
 
                     String email = jwtUtil.getEmailFromJwt(jwtToken);
-                    if((email != null) && (SecurityContextHolder.getContext().getAuthentication() == null)) {
+                    if((email != null)) {
                         List<GrantedAuthority> authorities = new ArrayList<>();
                         authorities.add(new SimpleGrantedAuthority(Authority.USER));
                         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, "(protected)", authorities);
