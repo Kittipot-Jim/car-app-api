@@ -20,12 +20,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.cors().disable()
-				.csrf().disable()
+		http.cors().and().csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 				.authorizeRequests()
-				.antMatchers("/**/v1/customer/register", "/**/v1/customer/authen")
+				.antMatchers("/**/v1/customer/register", "/**/v1/customer/authen", "/**/v1/customer/refresh-token")
 				.anonymous();
 
 	}
