@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
 				.authorizeRequests()
-				.antMatchers("/**/v1/customer/register", "/**/v1/customer/authen", "/**/v1/customer/refresh-token")
+				.antMatchers("/**/v1/customer/register", "/**/v1/customer/authen")
 				.anonymous();
 
 	}
